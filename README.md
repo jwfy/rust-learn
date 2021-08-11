@@ -1,6 +1,6 @@
 # rust 学习
 
-主要是rust的学习内容的记录
+主要是rust的学习内容的记录，具体的内容说明可以看各个文件夹下面的mod.rs文件的情况说明
 
 ```
 ➜  src git:(master) ✗ tree

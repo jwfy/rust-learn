@@ -8,6 +8,7 @@ struct Worker {
 }
 
 type Job = Box<dyn FnOnce() + Send + 'static>;
+// dyn 关键字是表示当前这个Job是依赖动态分派的，以往的情况都是静态分派（zero cost abstraction 零成本抽象）
 
 impl Worker {
     pub fn new(id: usize, receiver: Arc<Mutex<mpsc::Receiver<Job>>>) -> Self {
