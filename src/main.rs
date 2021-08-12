@@ -5,6 +5,9 @@ use threadpool::threadpool::ThreadPool;
 // mod文件可以依次管理其文件夹下面的各个文件以及需要对外pub的功能点
 // 然后利用use具体的引入需要被调用的方法
 
+
+mod list;
+
 fn main() {
     let pool = ThreadPool::new(23);
     pool.execute(|| {

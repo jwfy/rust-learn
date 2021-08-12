@@ -117,6 +117,23 @@ mod closure_test {
         // 这句话会报错的
     }
 
+    pub fn test_fn_mut_copy_move() {
+        #[derive(Clone, Debug)]
+        struct Man {
+            no : i32,
+            age : i32
+        }
+
+        let mut man = Man {
+            no: 12,
+            age: 56
+        };
+
+        test_fn(move || {
+            print!("test_fn_mut_copy_move {:?}", man);
+        })
+    }
+
     pub fn test_fn_n_n_p() {
         let a = "world".to_string();
 
