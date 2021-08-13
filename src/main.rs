@@ -7,6 +7,7 @@ use threadpool::threadpool::ThreadPool;
 
 
 mod list;
+mod basic;
 
 fn main() {
     let pool = ThreadPool::new(23);

@@ -1,6 +1,6 @@
 mod trait0 {
     use std::ops::{Deref, Add};
-    use crate::variable::Point;
+    use crate::basic::variable::Point;
 
     pub fn test_deref() {
         struct Point<T> {

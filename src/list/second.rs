@@ -84,6 +84,11 @@ impl <T> List <T>{
             &mut node.elem
         })
     }
+
+    pub fn into_iter(self) -> IntoIter<T> {
+        // 这个就相当于生成了一个迭代器生成器了
+        IntoIter(self)
+    }
 }
 
 impl <T> Drop for List<T> {
@@ -99,8 +104,44 @@ impl <T> Drop for List<T> {
 #[cfg(test)]
 mod test{
 
+    use super::List;
+
     #[test]
     fn test_peek() {
+        let mut list = List::<i32>::new();
+        // 贸然的什么都不改，也没实际的添加数据，该行代码会出错，因为不知道具体的泛型T指的什么
+        // 要么插入数据，要么约定类型，例如上面的List::<i32>::new()
+        assert_eq!(list.peek(), None);
+        assert_eq!(list.peek_mut(), None);
+        list.push(1);
+        list.push(2);
+        list.push(3);
 
+        assert_eq!(list.peek(), Some(&3));
+        list.peek_mut().map(|value| {
+            // 这个闭包参数不应该写 &mut value，返回都会映射到这个value上的
+            *value = 23
+        });
+
+        let q = vec![1,2,34];
+        q.iter();
     } 
+}
+
+// 接下来考虑考虑迭代了，
+// 一个是iterator迭代器，可以循环获取下一个数据
+// 一个是intoiter迭代器生成器，他类似一个producer，可以生成迭代器
+
+pub struct IntoIter<T>(List<T>);
+// 这是一个迭代器包装器，而且其中还是利用的元祖
+
+impl <T> Iterator for IntoIter<T> {
+    type Item = T;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        // 保证的是元祖，所以就使用self.0 去弄
+        self.0.pop()
+    }
+
+    
 }

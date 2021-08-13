@@ -29,28 +29,28 @@ mod threads {
         });
     }
 
-    pub fn test2() {
-        use std::sync::mpsc::channel;
-        use std::path::PathBuf;
-        use std::fs::File;
+    // pub fn test2() {
+    //     use std::sync::mpsc::channel;
+    //     use std::path::PathBuf;
+    //     use std::fs::File;
 
-        let documents: Vec<PathBuf> = Vec::new();
+    //     let documents: Vec<PathBuf> = Vec::new();
 
-        let (sender, receiver) = channel();
-        let handle = spawn(move || {
-            for filename in documents {
-                let mut f = File::open(filename).unwrap();
-                let mut text = String::new();
-                f.read_to_string(&mut text).unwrap();
+    //     let (sender, receiver) = channel();
+    //     let handle = spawn(move || {
+    //         for filename in documents {
+    //             let mut f = File::open(filename).unwrap();
+    //             let mut text = String::new();
+    //             f.read_to_string(&mut text).unwrap();
 
-                if sender.send(text).is_err() {
-                    break;
-                }
-            }
-            Ok(())
-        });
+    //             if sender.send(text).is_err() {
+    //                 break;
+    //             }
+    //         }
+    //         Ok(())
+    //     });
 
-    }
+    // }
 }
 
 pub fn test() {
