@@ -1,9 +1,8 @@
 mod threads {
-    use std::thread;
     use std::cell::RefCell;
-    use std::thread::spawn;
     use std::io::Read;
-
+    use std::thread;
+    use std::thread::spawn;
 
     pub fn test1() {
         thread_local! {
@@ -55,4 +54,19 @@ mod threads {
 
 pub fn test() {
     threads::test1();
+}
+
+#[cfg(test)]
+mod test {
+    use std::thread;
+
+    #[test]
+    pub fn test1() {
+        let mut v = vec![1, 2, 3, 4];
+        thread::spawn(move || {
+            v.push(5);
+        });
+        // v.push(6);
+        // 上面这个v的所有权经过转移操作了，现在v不再和vec有关联关系了，所以会报错
+    }
 }

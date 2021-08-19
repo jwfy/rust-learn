@@ -42,7 +42,7 @@
 // }
 
 mod copy_test {
-    use std::fmt::{Pointer, Formatter};
+    use std::fmt::{Formatter, Pointer};
 
     pub fn test_1() {
         let a = 32;
@@ -62,20 +62,16 @@ mod copy_test {
     }
 
     pub fn test_2() {
-
         // 这里添加Copy关键字与否，会影响到下面test_print 函数的执行情况
         // 如果实现了copy，则进行复制操作，不会进行所有权的转移，方法外对p1进行输出可以继续进行
         // 如果没有实现copy，则会进行所有权的转移，方法外的调用会出现错误
         #[derive(Debug, Clone, Copy)]
         pub struct Point {
             x: i32,
-            y: i32
+            y: i32,
         }
 
-        let p1 = Point {
-            x: 1,
-            y: 2
-        };
+        let p1 = Point { x: 1, y: 2 };
 
         fn test_print(point: Point) {
             println!("{:?}", point);
@@ -90,18 +86,61 @@ mod copy_test {
         #[derive(Debug, Clone, Copy)]
         pub struct Point {
             x: i32,
-            y: i32
+            y: i32,
         }
 
-        let p1 = Point{x:12, y:23};
+        let p1 = Point { x: 12, y: 23 };
         let p2 = p1;
         println!("{:?}", p1);
     }
-
 }
 
 pub fn test() {
     // copy_test::test_1();
     // copy_test::test_2();
     copy_test::test_3();
+}
+
+#[cfg(test)]
+mod test {
+
+    #[test]
+    fn test0() {
+        let a = "abc";
+        let b = a;
+        // 字面量是具有复制语义的，所以会进行一个深拷贝操作，生成两个全新的对象
+        println!("{}, {}", a, b);
+    }
+
+    #[test]
+    fn test1() {
+        struct A {
+            a: i32,
+        }
+
+        fn test(a: &mut A) {
+            // 这里还没测试a本身是mut的情况
+            println!("{}", a.a);
+            a.a = 10;
+            // a = &mut A { a: 9 }
+        }
+
+        let mut a = A { a: 12 };
+
+        test(&mut a);
+        println!("{}", a.a);
+    }
+
+    #[test]
+    fn test2() {
+        let mut v = vec![1, 2, 3];
+
+        fn test(a: &mut Vec<i32>) {
+            // 这里是&mut 那么传入的参数也一定得是&mut 否则编译器都无法过去
+            println!("{:?}", a);
+        }
+
+        test(&mut v);
+        println!("{:?}", v);
+    }
 }
