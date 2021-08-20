@@ -195,23 +195,22 @@ pub fn test() {
 #[cfg(test)]
 mod test {
 
-    struct User {
-        id: i32,
-        name: String,
-        gender: Gender,
+    #[test]
+    fn test() {
+        let s = "abc";
+        let s1 = s;
+        println!("{}, {}", s, s1);
+        // 这个例子能够跑过说明，&str 就等同于基本类型，同时也有一个名称「字符串字面量」
+        let a = 12;
+        let a1 = a;
+        println!("{}, {}", a, a1);
+        let mut ss = "abv";
+        let mut ss1 = ss;
+        ss = "abcdef";
+        ss1 = "aaaa";
+        println!("{}, {}", ss, ss1);
     }
 
-    impl User {
-        fn new(id: i32, name: String, gender: Gender) -> Self {
-            Self { id, name, gender }
-        }
-    }
-
-    enum Gender {
-        UNKONW = 0,
-        MAN = 1,
-        WOMAN = 2,
-    }
-
-    fn test() {}
+    #[test]
+    fn test1() {}
 }

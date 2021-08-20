@@ -8,6 +8,7 @@ use threadpool::threadpool::ThreadPool;
 mod basic;
 mod file_io;
 mod list;
+mod strtok;
 
 fn main() {
     let pool = ThreadPool::new(23);
