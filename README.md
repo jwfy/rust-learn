@@ -5,17 +5,29 @@
 ```
 ➜  src git:(master) ✗ tree
 .
+|____strtok
+| |____mod.rs
+| |____strtok.rs
+|____file_io
+| |____mod.rs
+| |____file_io.rs
 |____basic
 | |____trait0.rs
+| |____iter.rs
 | |____mod.rs
 | |____closure.rs
 | |____type_system.rs
 | |____owner_ship.rs
+| |____macros_.rs
 | |____variable.rs
 | |____threads.rs
 |____threadpool
 | |____threadpool.rs
 | |____mod.rs
+|____list
+| |____second.rs
+| |____mod.rs
+| |____first.rs
 |____main.rs
 ```
 
