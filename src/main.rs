@@ -6,9 +6,8 @@ use threadpool::threadpool::ThreadPool;
 // 然后利用use具体的引入需要被调用的方法
 
 mod basic;
-mod file_io;
 mod list;
-mod strtok;
+mod live_coding;
 
 fn main() {
     let pool = ThreadPool::new(23);

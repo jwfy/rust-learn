@@ -69,4 +69,20 @@ mod test {
         // v.push(6);
         // 上面这个v的所有权经过转移操作了，现在v不再和vec有关联关系了，所以会报错
     }
+
+    #[test]
+    pub fn test2() {
+        let s = "hello world".to_string();
+        let s1 = "hello world";
+        thread::spawn(move || {
+            println!("{}", s);
+            // 这里s和s1都可以使用，前提是必须使用move，把所有权转移到闭包内部
+            // 如果仔细看线程spawn方法，也可以发现
+        });
+
+        let si = 1000;
+        thread::spawn(move || {
+            println!("{}", si);
+        });
+    }
 }

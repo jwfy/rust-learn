@@ -212,5 +212,22 @@ mod test {
     }
 
     #[test]
-    fn test1() {}
+    fn test1() {
+        let s = "abcdef";
+        fn test(s: &str) -> &str {
+            s
+        }
+
+        let s1 = test(s);
+        println!("{}", s1);
+
+        let mut ms = "abcddef";
+        fn test1<'a>(s: &'a mut &str) -> &'a str {
+            s
+        }
+
+        let ms1 = test1(&mut ms);
+        // 这里写的&mut ms 并且ms 类型是&str, 所以上面写的参数是&mut &str 类型的
+        println!("{}", ms1);
+    }
 }

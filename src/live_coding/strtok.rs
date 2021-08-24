@@ -3,6 +3,8 @@ pub fn strtok<'a>(s: &'a mut &str, p: char) -> &'a str {
         Some(idx) => {
             let prefix = &s[..idx];
             let suffix = &s[idx + p.len_utf8()..];
+            // 这个len_utf8主要是因为其长度在不同环境下是可变的，所以不能贸然的+1操作
+            // &s[..idx] 其实就是类似于字符串字面量的切面而已
             *s = suffix;
             prefix
         }
